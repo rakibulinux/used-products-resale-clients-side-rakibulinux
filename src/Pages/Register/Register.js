@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/Button/PrimaryButton";
@@ -6,6 +6,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
 
 const Register = () => {
+  const [role, setRole] = useState("seller");
   const { createUserAccount, updateUserProfile, signInWithGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Register = () => {
                   toast.error(err.message);
                 });
               console.log(user);
-              setAuthToken(user);
+              setAuthToken(user, role);
               navigate(from, { replace: true });
             })
             .catch((err) => {
@@ -62,13 +63,14 @@ const Register = () => {
         toast.success("Login success with google");
 
         console.log(user);
-        setAuthToken(user);
+        setAuthToken(user, "buyer");
         navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.message);
       });
   };
+  // console.log(role);
 
   return (
     <div className="flex justify-center items-center pt-8">
@@ -138,6 +140,37 @@ const Register = () => {
                 placeholder="*******"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-200 focus:outline-cyan-500 text-gray-900"
               />
+            </div>
+            <div>
+              <div className="flex justify-between mb-2">
+                <label htmlFor="role" className="text-sm">
+                  Choose one
+                </label>
+              </div>
+              <div className="form-control">
+                <label className="label cursor-pointer">
+                  <span className="label-text">Seller</span>
+                  <input
+                    type="radio"
+                    name="role"
+                    className="radio checked:bg-cyan-500"
+                    value="seller"
+                    onClick={(e) => setRole(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div className="form-control">
+                <label className="label cursor-pointer">
+                  <span className="label-text">Buyer</span>
+                  <input
+                    type="radio"
+                    name="role"
+                    className="radio checked:bg-sky-500"
+                    onClick={(e) => setRole(e.target.value)}
+                    value="buyer"
+                  />
+                </label>
+              </div>
             </div>
           </div>
           <div className="space-y-2">

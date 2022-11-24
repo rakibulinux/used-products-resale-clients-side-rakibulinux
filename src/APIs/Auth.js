@@ -1,8 +1,9 @@
-export const setAuthToken = (user) => {
+export const setAuthToken = (user, role) => {
   const currentUser = {
     email: user.email,
+    role: role,
   };
-
+  console.log(currentUser);
   // Save user is DB
   fetch(`${process.env.REACT_APP_API_URL}/users/${user?.email}`, {
     method: "PUT",

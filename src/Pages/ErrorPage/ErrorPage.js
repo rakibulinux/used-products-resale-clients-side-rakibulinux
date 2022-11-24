@@ -1,4 +1,3 @@
-import { HandThumbDownIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/Button/PrimaryButton";
