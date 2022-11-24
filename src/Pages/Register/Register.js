@@ -1,21 +1,13 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { setAuthToken } from "../../api/auth";
 import PrimaryButton from "../../components/Button/PrimaryButton";
-import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { setAuthToken } from "../../APIs/Auth";
 
 const Register = () => {
-  const {
-    createUserAccount,
-    updateUserProfile,
-    verifyEmail,
-    signInWithGoogle,
-    loading,
-    setLoading,
-  } = useContext(AuthContext);
+  const { createUserAccount, updateUserProfile, signInWithGoogle } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const localtion = useLocation();
   const from = localtion.state?.from?.pathname || "/";
@@ -51,15 +43,8 @@ const Register = () => {
                 .catch((err) => {
                   toast.error(err.message);
                 });
-              verifyEmail()
-                .then(() => {
-                  toast.success("Email send success");
-                })
-                .catch((err) => {
-                  toast.error(err.message);
-                });
               console.log(user);
-              //   setAuthToken(user);
+              setAuthToken(user);
               navigate(from, { replace: true });
             })
             .catch((err) => {
@@ -67,20 +52,17 @@ const Register = () => {
             });
         }
       });
-    setLoading(false);
   };
-  if (loading) {
-    return <Spinner />;
-  }
+
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
 
-        toast.success("Login with google success");
+        toast.success("Login success with google");
 
         console.log(user);
-        // setAuthToken(user);
+        setAuthToken(user);
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -112,7 +94,7 @@ const Register = () => {
                 id="name"
                 required
                 placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-cyan-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
               />
             </div>
@@ -138,7 +120,7 @@ const Register = () => {
                 name="email"
                 id="email"
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-cyan-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
               />
             </div>
@@ -154,7 +136,7 @@ const Register = () => {
                 id="password"
                 required
                 placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-200 focus:outline-green-500 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-200 focus:outline-cyan-500 text-gray-900"
               />
             </div>
           </div>
@@ -169,12 +151,11 @@ const Register = () => {
             </div>
           </div>
         </form>
+        <div className="divider">OR</div>
         <div className="flex items-center pt-4 space-x-1">
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-          <p className="px-3 text-sm dark:text-gray-400">
-            Signup with social accounts
-          </p>
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+          <div className="flex-1 h-px sm:w-16 "></div>
+          <p className="px-3 text-sm">Signup with Google Account</p>
+          <div className="flex-1 h-px sm:w-16 "></div>
         </div>
         <div className="flex justify-center space-x-4">
           <button

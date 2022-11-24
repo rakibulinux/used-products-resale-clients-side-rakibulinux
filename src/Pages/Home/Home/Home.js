@@ -1,10 +1,11 @@
 import React from "react";
 import SellOldPhoneGuide from "../SellOldPhoneGuide/SellOldPhoneGuide";
+import Slider from "../Slider/Slider";
 
 const Home = () => {
   return (
     <div>
-      <h1>Hello</h1>
+      <Slider />
       <SellOldPhoneGuide />
     </div>
   );

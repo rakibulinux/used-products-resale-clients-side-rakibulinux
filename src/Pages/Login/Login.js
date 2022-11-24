@@ -1,18 +1,13 @@
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { setAuthToken } from "../../api/auth";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { setAuthToken } from "../../APIs/Auth";
 
 const Login = () => {
-  const {
-    signInWithGoogle,
-    signin,
-    resetPassword: resetUserAccountPassword,
-    loading,
-    setLoading,
-  } = useContext(AuthContext);
+  const { signInWithGoogle, loginUserAccount, resetUserAccountPassword } =
+    useContext(AuthContext);
 
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
@@ -26,17 +21,16 @@ const Login = () => {
     const password = form.password.value;
 
     //Sign In user
-    signin(email, password)
+    loginUserAccount(email, password)
       .then((result) => {
         const user = result.user;
         toast.success("Login with email success");
         console.log(user);
-        // setAuthToken(user);
+        setAuthToken(user);
         navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.message);
-        setLoading(false);
       });
   };
 
@@ -45,7 +39,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Login with google success");
-        // setAuthToken(user);
+        setAuthToken(user);
         console.log(user);
         navigate(from, { replace: true });
       })
@@ -81,9 +75,11 @@ const Login = () => {
         >
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block mb-2 text-sm">
-                Email address
-              </label>
+              <div className="flex justify-between">
+                <label htmlFor="email" className="block mb-2 text-sm">
+                  Email address
+                </label>
+              </div>
               <input
                 onBlur={(e) => setUserEmail(e.target.value)}
                 type="email"
@@ -91,7 +87,7 @@ const Login = () => {
                 id="email"
                 required
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-cyan-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
               />
             </div>
@@ -107,7 +103,7 @@ const Login = () => {
                 id="password"
                 required
                 placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-cyan-500 bg-gray-200 text-gray-900"
               />
             </div>
           </div>
@@ -129,13 +125,13 @@ const Login = () => {
             Forgot password?
           </button>
         </div>
+        <div className="divider">OR</div>
         <div className="flex items-center pt-4 space-x-1">
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-          <p className="px-3 text-sm dark:text-gray-400">
-            Login with social accounts
-          </p>
-          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+          <div className="flex-1 h-px sm:w-16 "></div>
+          <p className="px-3 text-sm">Login with Google Account</p>
+          <div className="flex-1 h-px sm:w-16 "></div>
         </div>
+
         <div className="flex justify-center space-x-4">
           <button
             onClick={handleGoogleLogin}
