@@ -105,7 +105,7 @@ const Navbar = () => {
         <div className="dropdown">
           <label
             tabIndex={0}
-            className="btn bg-gradient-to-r from-cyan-500  to-sky-600 border-none hover:bg-cyan-600 lg:hidden"
+            className="btn bg-gradient-to-r from-cyan-500  to-sky-600 border-none hover:bg-cyan-600 md:hidden"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
