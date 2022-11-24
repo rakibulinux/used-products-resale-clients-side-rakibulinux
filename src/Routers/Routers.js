@@ -4,6 +4,7 @@ import Main from "../Layout/Main";
 import Blog from "../Pages/Blog/Blog";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
+import ProductsCategories from "../Pages/Home/SecondHandProductCategories/ProductsCategories/ProductsCategories";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />,
+      },
+      {
+        path: "/category/:id",
+        element: <ProductsCategories />,
+        loader: ({ params }) =>
+          fetch(
+            `${process.env.REACT_APP_API_URL}/categoriesProducts/${params.id}`
+          ),
       },
       {
         path: "/login",
