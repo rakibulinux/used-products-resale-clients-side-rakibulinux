@@ -39,6 +39,14 @@ const Navbar = () => {
           <li>
             <NavLink
               className={({ isActive }) => (isActive ? "text-sky-600" : "")}
+              to="/categories"
+            >
+              Categories
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "text-sky-600" : "")}
               to="/login"
             >
               <PrimaryButton classes="rounded-full px-2 py-1">
