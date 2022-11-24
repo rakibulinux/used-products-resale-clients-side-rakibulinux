@@ -18,7 +18,7 @@ const SellOldPhoneGuide = () => {
       <div className="divider md:w-8/12 md:mx-auto my-10 sm:text-2xl md:text-5xl ">
         How to Sell Old Phones
       </div>
-      <p className="w-9/12 mx-auto">
+      <p className="w-11/12 text-center mx-auto">
         When you want to know how much your cell phone is worth, millions of
         people across the US benefit from getting cash for their old phones
         using our comparison process. It's so simple - compare prices by using
