@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import OldPhoneDetails from "./OldPhoneDetails";
+import Spinner from "../../../components/Spinner/Spinner";
 
 const SellOldPhoneGuide = () => {
   const [oldPhones, setOldPhones] = useState(null);
@@ -11,9 +13,12 @@ const SellOldPhoneGuide = () => {
       });
   }, []);
   console.log(oldPhones);
+  if (!oldPhones) return <Spinner />;
   return (
     <div>
-      <h1>{oldPhones.length}</h1>
+      {oldPhones.map((oldPhone) => (
+        <OldPhoneDetails key={oldPhone._id} oldPhone={oldPhone} />
+      ))}
     </div>
   );
 };
