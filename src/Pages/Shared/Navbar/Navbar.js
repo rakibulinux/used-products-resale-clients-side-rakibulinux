@@ -77,10 +77,12 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "text-sky-600" : "")}
-              to="/add-service"
+              className={({ isActive }) =>
+                isActive ? "text-sky-600 bg-none hover:bg-none" : ""
+              }
+              to="/dashboard"
             >
-              Add Service
+              Dashboard
             </NavLink>
           </li>
           <li>

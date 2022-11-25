@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useAdmin from "../../hooks/useAdmin";
 
-const AdminRoute = ({ children }) => {
+const DashboardRoute = ({ children }) => {
   const { user, loading, signOutUser } = useContext(AuthContext);
   const [isAdmin, isAdminLoading] = useAdmin(user?.email);
   const location = useLocation();
@@ -18,4 +18,4 @@ const AdminRoute = ({ children }) => {
   );
 };
 
-export default AdminRoute;
+export default DashboardRoute;

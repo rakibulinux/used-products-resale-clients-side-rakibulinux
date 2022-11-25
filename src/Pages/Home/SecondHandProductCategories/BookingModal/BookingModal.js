@@ -1,20 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import PrimaryButton from "../../../../components/Button/PrimaryButton";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 
 const BookingModal = ({ usedPhone }) => {
-  const [booking, setBooking] = useState(null);
   const { user } = useContext(AuthContext);
-  const {
-    phoneName,
-    originalPrice,
-    resalePrice,
-    picture,
-    publishedDate,
-    location,
-    yearsOfUse,
-  } = usedPhone;
+  const { phoneName, originalPrice, resalePrice } = usedPhone;
 
   const handleBooking = (e) => {
     e.preventDefault();
@@ -45,9 +36,7 @@ const BookingModal = ({ usedPhone }) => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          setBooking(null);
           toast.success("Booking success");
-          //   refetch();
         } else {
           toast.error(data.message);
         }
