@@ -5,7 +5,11 @@ const useAdmin = (email) => {
   const [isAdminLoading, setIsAdminLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(`${process.env.REACT_APP_API_URL}/users/admin/${email}`)
+      fetch(`${process.env.REACT_APP_API_URL}/users/admin/${email}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           setIsAdmin(data.isAdmin);

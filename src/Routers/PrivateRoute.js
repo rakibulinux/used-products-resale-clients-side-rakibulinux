@@ -4,14 +4,19 @@ import Spinner from "../components/Spinner/Spinner";
 import { AuthContext } from "../contexts/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, signOutUser } = useContext(AuthContext);
   const location = useLocation();
+  const token = localStorage.getItem("usedPhoneToken");
+  console.log(token);
 
   if (loading) {
     return <Spinner />;
   }
+  // if (!token) {
+  //   return children;
+  // }
 
-  if (user && user?.uid) {
+  if (user && user?.uid && token) {
     return children;
   }
   return <Navigate to="/login" state={{ from: location }} replace />;

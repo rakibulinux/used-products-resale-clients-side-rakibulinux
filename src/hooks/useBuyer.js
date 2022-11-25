@@ -5,7 +5,11 @@ const useBuyer = (email) => {
   const [isBuyerLoading, setIsBuyerLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(`${process.env.REACT_APP_API_URL}/users/buyer/${email}`)
+      fetch(`${process.env.REACT_APP_API_URL}/users/buyer/${email}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           setIsBuyer(data.isBuyer);
