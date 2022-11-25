@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
+import PrimaryButton from "../../../../components/Button/PrimaryButton";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 
 const BookingModal = ({ usedPhone }) => {
@@ -14,6 +15,7 @@ const BookingModal = ({ usedPhone }) => {
     location,
     yearsOfUse,
   } = usedPhone;
+
   const handleBooking = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,17 +23,18 @@ const BookingModal = ({ usedPhone }) => {
     const name = form.name.value;
     const email = form.email.value;
     const phone = form.phone.value;
+    const meetingLocation = form.meetingLocation.value;
     const booking = {
-      patient: name,
-
+      name,
+      meetingLocation,
       email,
       phone,
-      originalPrice: originalPrice,
-      resalePrice: resalePrice,
+      originalPrice,
+      resalePrice,
     };
     console.log(booking);
     // setTreatment(null);
-    fetch("https://doctors-portal-server-nu-two.vercel.app/bookings", {
+    fetch(`${process.env.REACT_APP_API_URL}/bookings`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -70,40 +73,103 @@ const BookingModal = ({ usedPhone }) => {
             X
           </label>
           <form onSubmit={handleBooking}>
-            <input
-              defaultValue={user?.displayName}
-              type="text"
-              name="name"
-              placeholder="Your name"
-              className="mt-4 input input-bordered w-full"
-              disabled
-            />
-            <p className="mt-4 bordered w-full">
-              Original price: {originalPrice}
-            </p>
-            <p className="mt-4 bordered w-full">Resale price: {resalePrice}</p>
-            <input
-              defaultValue={user?.email}
-              type="email"
-              name="email"
-              placeholder="Your email"
-              className="mt-4 input input-bordered w-full"
-              required
-              disabled
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Your phone"
-              className="mt-4 input input-bordered w-full"
-            />
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Product Name?</span>
+              </label>
+              <input
+                defaultValue={phoneName}
+                type="text"
+                name="phoneName"
+                placeholder="phoneName"
+                className="input input-bordered w-full"
+                disabled
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Your Name?</span>
+              </label>
+              <input
+                defaultValue={user?.displayName}
+                type="text"
+                name="name"
+                placeholder="Your name"
+                className="input input-bordered w-full"
+                disabled
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Your Email?</span>
+              </label>
+              <input
+                defaultValue={user?.email}
+                type="email"
+                name="email"
+                placeholder="Your email"
+                className="input input-bordered w-full"
+                required
+                disabled
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Your phone?</span>
+              </label>
+              <input
+                type="text"
+                name="phone"
+                placeholder="Your phone"
+                className="input input-bordered w-full"
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Meeting location?</span>
+              </label>
+              <input
+                type="text"
+                name="meetingLocation"
+                placeholder="Meeting location"
+                className="input input-bordered w-full"
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Original price?</span>
+              </label>
+              <input
+                type="text"
+                defaultValue={`$${originalPrice}`}
+                name="originalPrice"
+                placeholder="Your originalPrice"
+                className="input input-bordered w-full"
+                required
+                disabled
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Resale price?</span>
+              </label>
+              <input
+                type="text"
+                defaultValue={`$${resalePrice}`}
+                name="resalePrice"
+                placeholder="Your resalePrice"
+                className="input input-bordered w-full"
+                required
+                disabled
+              />
+            </div>
             <div className="modal-action">
-              <label
-                htmlFor="booking-modal"
-                className="hover:text-gray-100 bg-gradient-to-r from-cyan-500 to-sky-600 w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 text-gray-100 text-center cursor-pointer"
+              <PrimaryButton
+                type="submit"
+                classes="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
               >
                 Book Now
-              </label>
+              </PrimaryButton>
             </div>
           </form>
         </div>
