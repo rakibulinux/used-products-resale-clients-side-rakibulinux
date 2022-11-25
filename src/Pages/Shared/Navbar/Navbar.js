@@ -20,14 +20,6 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) => (isActive ? "text-sky-600" : "")}
-          to="/services"
-        >
-          Services
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) => (isActive ? "text-sky-600" : "")}
           to="/blog"
         >
           Blog
@@ -67,14 +59,6 @@ const Navbar = () => {
         </>
       ) : (
         <>
-          <li>
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-sky-600" : "")}
-              to="/my-reviews"
-            >
-              My Reviews
-            </NavLink>
-          </li>
           <li>
             <NavLink
               className={({ isActive }) =>
