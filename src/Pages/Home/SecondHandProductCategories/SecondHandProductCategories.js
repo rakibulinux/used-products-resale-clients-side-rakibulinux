@@ -1,16 +1,9 @@
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
 import Spinner from "../../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
+import { APIContext } from "../../../contexts/APIProvider";
 const SecondHandProductCategories = () => {
-  const { data: categories, isLoading } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/categories`);
-      const data = res.json();
-      return data;
-    },
-  });
+  const { categories, isLoading } = useContext(APIContext);
   if (isLoading) {
     return <Spinner />;
   }

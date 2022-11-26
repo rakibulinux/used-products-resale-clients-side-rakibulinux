@@ -1,7 +1,6 @@
 import React from "react";
-import BookingModal from "../BookingModal/BookingModal";
 
-const ProductDetails = ({ usedPhone }) => {
+const ProductDetails = ({ usedPhone, setCategory }) => {
   const {
     phoneName,
     originalPrice,
@@ -39,7 +38,13 @@ const ProductDetails = ({ usedPhone }) => {
           <span className="font-bold">Posted Time:</span> {publishedDate}
         </p>
         <div className="card-actions w-full">
-          <BookingModal usedPhone={usedPhone} />
+          <label
+            onClick={() => setCategory(usedPhone)}
+            htmlFor="booking-modal"
+            className="hover:text-gray-100 bg-gradient-to-r from-cyan-500 to-sky-600 w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 text-gray-100 cursor-pointer"
+          >
+            Book now
+          </label>
         </div>
       </div>
     </div>

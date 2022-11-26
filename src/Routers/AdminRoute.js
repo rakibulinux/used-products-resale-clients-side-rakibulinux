@@ -8,8 +8,8 @@ const AdminRoute = ({ children }) => {
   const { user, loading, signOutUser } = useContext(AuthContext);
   const [isAdmin, isAdminLoading] = useAdmin(user?.email);
   const location = useLocation();
-  const token = localStorage.getItem("usedPhoneToken");
-  console.log(token);
+  // const token = localStorage.getItem("usedPhoneToken");
+  // console.log(token);
   if (loading || isAdminLoading) {
     return <Spinner />;
   }
