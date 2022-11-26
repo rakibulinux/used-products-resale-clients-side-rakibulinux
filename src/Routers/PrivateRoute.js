@@ -11,9 +11,6 @@ const PrivateRoute = ({ children }) => {
   if (loading) {
     return <Spinner />;
   }
-  // if (!token) {
-  //   return children;
-  // }
 
   if (user && user?.uid && token) {
     return children;

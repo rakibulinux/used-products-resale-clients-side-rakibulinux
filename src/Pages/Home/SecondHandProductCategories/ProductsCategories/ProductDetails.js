@@ -41,7 +41,7 @@ const ProductDetails = ({ usedPhone, setCategory }) => {
           <label
             onClick={() => setCategory(usedPhone)}
             htmlFor="booking-modal"
-            className="hover:text-gray-100 bg-gradient-to-r from-cyan-500 to-sky-600 w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 text-gray-100 cursor-pointer"
+            className="hover:text-gray-100 bg-gradient-to-r from-cyan-500 to-sky-600 w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 text-gray-100 cursor-pointer text-center"
           >
             Book now
           </label>
