@@ -1,4 +1,5 @@
 import React from "react";
+import { FaCheckCircle } from "react-icons/fa";
 
 const AdvertisedItemDetails = ({ product, setCategory }) => {
   const {
@@ -8,7 +9,7 @@ const AdvertisedItemDetails = ({ product, setCategory }) => {
     picture,
     publishedDate,
     location,
-    seller: { name, img },
+    seller: { name, img, verify },
     yearsOfUse,
   } = product;
   return (
@@ -19,6 +20,9 @@ const AdvertisedItemDetails = ({ product, setCategory }) => {
       <div className="flex items-center gap-4 my-2">
         <img className="rounded-full w-10" src={img} alt={name} />
         <p>{name}</p>
+        <span>
+          {verify === true ? <FaCheckCircle /> : <span>Not verified</span>}
+        </span>
       </div>
       <div className="card-body">
         <h2 className="card-title">{phoneName}</h2>

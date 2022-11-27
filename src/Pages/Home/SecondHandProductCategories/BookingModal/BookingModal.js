@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import PrimaryButton from "../../../../components/Button/PrimaryButton";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 
@@ -156,13 +157,25 @@ const BookingModal = ({ setCategory, category }) => {
                 disabled
               />
             </div>
-            <div className="modal-action">
-              <PrimaryButton
-                type="submit"
-                classes="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
-              >
-                Book Now
-              </PrimaryButton>
+            <div className="modal-action justify-center">
+              {user?.uid ? (
+                <PrimaryButton
+                  type="submit"
+                  classes="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
+                >
+                  Book Now
+                </PrimaryButton>
+              ) : (
+                <Link className="w-full" to="/login">
+                  {"To Book login your buyer account"}
+                  <PrimaryButton
+                    type="submit"
+                    classes="w-full mt-2 px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
+                  >
+                    Login Now
+                  </PrimaryButton>
+                </Link>
+              )}
             </div>
           </form>
         </div>

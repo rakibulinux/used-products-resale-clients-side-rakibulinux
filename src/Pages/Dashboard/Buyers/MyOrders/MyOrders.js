@@ -7,11 +7,7 @@ import { AuthContext } from "../../../../contexts/AuthProvider";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const url = `${process.env.REACT_APP_API_URL}/my-orders?email=${user?.email}`;
-  const {
-    data: orders,
-    refetch,
-    isLoading,
-  } = useQuery({
+  const { data: orders, isLoading } = useQuery({
     queryKey: ["myorders"],
     queryFn: async () => {
       const res = await fetch(url);

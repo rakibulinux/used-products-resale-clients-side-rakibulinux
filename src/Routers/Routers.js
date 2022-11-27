@@ -3,7 +3,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import Blog from "../Pages/Blog/Blog";
 import AddProduct from "../Pages/Dashboard/Seller/AddProduct/AddProduct";
-import AllUsers from "../Pages/Dashboard/Admin/AllUsers/AllUsers";
+import WelcomeDashboard from "../Pages/Dashboard/Admin/WelcomeDashboard/WelcomeDashboard";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import ProductsCategories from "../Pages/Home/SecondHandProductCategories/ProductsCategories/ProductsCategories";
@@ -79,11 +79,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/dashboard/allusers",
+        path: "/dashboard/",
         element: (
-          <AdminRoute>
-            <AllUsers />
-          </AdminRoute>
+          <PrivateRoute>
+            <WelcomeDashboard />
+          </PrivateRoute>
         ),
       },
       {
@@ -146,9 +146,7 @@ const router = createBrowserRouter([
         path: "/dashboard/payment/:id",
         element: <Payments />,
         loader: ({ params }) =>
-          fetch(
-            `https://doctors-portal-server-nu-two.vercel.app/bookings/${params.id}`
-          ),
+          fetch(`${process.env.REACT_APP_API_URL}/bookings/${params.id}`),
       },
     ],
   },

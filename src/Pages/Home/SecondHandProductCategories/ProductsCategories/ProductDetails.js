@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FaCheckCircle } from "react-icons/fa";
 const ProductDetails = ({ usedPhone, setCategory }) => {
   const {
     phoneName,
@@ -8,7 +8,7 @@ const ProductDetails = ({ usedPhone, setCategory }) => {
     picture,
     publishedDate,
     location,
-    seller: { name, img },
+    seller: { name, img, verify },
     yearsOfUse,
   } = usedPhone;
   return (
@@ -19,6 +19,13 @@ const ProductDetails = ({ usedPhone, setCategory }) => {
       <div className="flex items-center gap-4 my-2">
         <img className="rounded-full w-10" src={img} alt={name} />
         <p>{name}</p>
+        <span>
+          {verify === true ? (
+            <FaCheckCircle className="text-cyan-500" />
+          ) : (
+            <span>Not verified</span>
+          )}
+        </span>
       </div>
       <div className="card-body">
         <h2 className="card-title">{phoneName}</h2>
