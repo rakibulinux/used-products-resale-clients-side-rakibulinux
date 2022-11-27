@@ -5,9 +5,9 @@ import { AuthContext } from "../../../../contexts/AuthProvider";
 
 const BookingModal = ({ setCategory, category }) => {
   const { user } = useContext(AuthContext);
-  const { phoneName, originalPrice, resalePrice } = category;
+  const { phoneName, originalPrice, resalePrice, picture } = category;
 
-  console.log(originalPrice);
+  console.log(category);
 
   const handleBooking = (e) => {
     e.preventDefault();
@@ -21,6 +21,8 @@ const BookingModal = ({ setCategory, category }) => {
     const meetingLocation = form.meetingLocation.value;
     const booking = {
       name,
+      phoneName: phoneName,
+      picture: picture,
       meetingLocation,
       email,
       phone,
@@ -47,9 +49,7 @@ const BookingModal = ({ setCategory, category }) => {
         }
       });
   };
-  // if (category) {
-  //   return <Spinner />;
-  // }
+
   return (
     <div className="w-full flex justify-center items-center text-center p-4">
       {/* The button to open modal */}
@@ -134,7 +134,7 @@ const BookingModal = ({ setCategory, category }) => {
               </label>
               <input
                 type="text"
-                defaultValue={originalPrice}
+                defaultValue={`$${originalPrice}`}
                 name="originalPrice"
                 placeholder="Your originalPrice"
                 className="input input-bordered w-full"

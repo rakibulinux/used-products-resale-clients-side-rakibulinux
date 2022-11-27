@@ -19,6 +19,7 @@ import MyBuyers from "../Pages/Dashboard/Seller/MyBuyers/MyBuyers";
 import AllSellers from "../Pages/Dashboard/Admin/AllSellers/AllSellers";
 import AllBuyers from "../Pages/Dashboard/Admin/AllBuyers/AllBuyers";
 import ReportedItems from "../Pages/Dashboard/Admin/ReportedItems/ReportedItems";
+import MyOrders from "../Pages/Dashboard/Buyers/MyOrders/MyOrders";
 
 const router = createBrowserRouter([
   {
@@ -137,7 +138,7 @@ const router = createBrowserRouter([
         path: "/dashboard/my-orders",
         element: (
           <BuyerRoute>
-            <MyBuyers />
+            <MyOrders />
           </BuyerRoute>
         ),
       },

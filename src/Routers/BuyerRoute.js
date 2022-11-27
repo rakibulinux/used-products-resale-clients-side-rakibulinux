@@ -11,12 +11,13 @@ const BuyerRoute = ({ children }) => {
   if (loading || isBuyerLoading) {
     return <Spinner />;
   }
-  if (user && isBuyer) {
-    return children;
+  if (!user && !isBuyer) {
+    return (
+      signOutUser(),
+      (<Navigate to="/login" state={{ from: location }} replace />)
+    );
   }
-  return (
-    signOutUser(), (<Navigate to="/login" state={{ from: location }} replace />)
-  );
+  return children;
 };
 
 export default BuyerRoute;

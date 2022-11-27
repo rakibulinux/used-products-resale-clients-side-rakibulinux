@@ -11,12 +11,13 @@ const SellerRoute = ({ children }) => {
   if (loading || isSellerLoading) {
     return <Spinner />;
   }
-  if (user && isSeller) {
-    return children;
+  if (!user && !isSeller) {
+    return (
+      signOutUser(),
+      (<Navigate to="/login" state={{ from: location }} replace />)
+    );
   }
-  return (
-    signOutUser(), (<Navigate to="/login" state={{ from: location }} replace />)
-  );
+  return children;
 };
 
 export default SellerRoute;

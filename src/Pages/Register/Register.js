@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
 
 const Register = () => {
-  const [role, setRole] = useState("seller");
+  const [role, setRole] = useState("buyer");
   const { createUserAccount, updateUserProfile, signInWithGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ const Register = () => {
         toast.success("Login success with google");
 
         console.log(user);
-        setAuthToken(user, "buyer");
+        setAuthToken(user, role);
         navigate(from, { replace: true });
       })
       .catch((err) => {

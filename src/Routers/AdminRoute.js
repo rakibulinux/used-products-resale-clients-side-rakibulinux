@@ -13,12 +13,13 @@ const AdminRoute = ({ children }) => {
   if (loading || isAdminLoading) {
     return <Spinner />;
   }
-  if (user && isAdmin) {
-    return children;
+  if (!user && !isAdmin) {
+    return (
+      signOutUser(),
+      (<Navigate to="/login" state={{ from: location }} replace />)
+    );
   }
-  return (
-    signOutUser(), (<Navigate to="/login" state={{ from: location }} replace />)
-  );
+  return children;
 };
 
 export default AdminRoute;

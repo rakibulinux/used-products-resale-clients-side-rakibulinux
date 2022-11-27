@@ -34,9 +34,31 @@ const MyProducts = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.acknowledged) {
+        if (data.modifiedCount > 0) {
+          toast.success("Advertisement Added");
+          refetch();
+        } else {
+          toast.success("Already placed for Advertisement");
+        }
+        console.log(data);
+      });
+  };
+  const handleStatusChange = (id) => {
+    fetch(`${process.env.REACT_APP_API_URL}/statusChange/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
+      },
+      body: JSON.stringify(id),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
           toast.success("Status Change");
           refetch();
+        } else {
+          toast.success("Already placed for Advertisement");
         }
         console.log(data);
       });
@@ -56,6 +78,7 @@ const MyProducts = () => {
                 <th>No</th>
                 <th>Name</th>
                 <th>Price</th>
+                <th>Change Status</th>
                 <th>Sales Status</th>
                 <th>Advertise</th>
                 <th>Delete</th>
@@ -67,6 +90,17 @@ const MyProducts = () => {
                   <th>{idx + 1}</th>
                   <td>{product.phoneName}</td>
                   <td>{product.resalePrice}</td>
+
+                  <td>
+                    {!product?.advertise && (
+                      <button
+                        onClick={() => handleStatusChange(product._id)}
+                        className="btn btn-xs border-none bg-pink-700"
+                      >
+                        Change Status
+                      </button>
+                    )}
+                  </td>
                   <td>{product?.status}</td>
                   <td>
                     {product?.status && (

@@ -12,10 +12,10 @@ const PrivateRoute = ({ children }) => {
     return <Spinner />;
   }
 
-  if (user && user?.uid && token) {
-    return children;
+  if (!user && !user?.uid && !token) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  return <Navigate to="/login" state={{ from: location }} replace />;
+  return children;
 };
 
 export default PrivateRoute;

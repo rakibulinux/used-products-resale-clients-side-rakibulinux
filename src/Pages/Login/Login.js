@@ -4,10 +4,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
+import Spinner from "../../components/Spinner/Spinner";
 
 const Login = () => {
-  const { signInWithGoogle, loginUserAccount, resetUserAccountPassword } =
-    useContext(AuthContext);
+  const {
+    signInWithGoogle,
+    loginUserAccount,
+    resetUserAccountPassword,
+    loading,
+  } = useContext(AuthContext);
 
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
@@ -41,6 +46,9 @@ const Login = () => {
         toast.success("Login with google success");
         setAuthToken(user);
         console.log(user);
+        if (loading) {
+          return <Spinner />;
+        }
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -57,6 +65,10 @@ const Login = () => {
         toast.error(err.message);
       });
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="flex justify-center items-center pt-8">
