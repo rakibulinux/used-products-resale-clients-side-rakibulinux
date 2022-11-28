@@ -5,21 +5,23 @@ import { AuthContext } from "../contexts/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
 
 const AdminRoute = ({ children }) => {
-  const { user, loading, signOutUser } = useContext(AuthContext);
-  const [isAdmin, isAdminLoading] = useAdmin(user?.email);
+  const {
+    user,
+    loading,
+    signOutUser: logoutUserAccount,
+  } = useContext(AuthContext);
   const location = useLocation();
-  // const token = localStorage.getItem("usedPhoneToken");
-  // console.log(token);
+  const [isAdmin, isAdminLoading] = useAdmin(user?.email);
+  // const location = useLocation();
   if (loading || isAdminLoading) {
     return <Spinner />;
   }
   if (!user && !isAdmin) {
     return (
-      signOutUser(),
-      (<Navigate to="/login" state={{ from: location }} replace />)
+      logoutUserAccount(),
+      (<Navigate to="/" state={{ from: location }} replace />)
     );
   }
   return children;
 };
-
 export default AdminRoute;

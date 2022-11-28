@@ -43,21 +43,21 @@ const AddProduct = () => {
             phoneName: data.name,
             yearsOfUse: data.yearsOfUse,
             phoneNumber: data.phoneNumber,
+            email: user?.email,
             seller: {
               name: user?.displayName,
               img: user?.photoURL,
+              verify: false,
             },
 
             location: data.location,
-            email: user?.email,
-            // picture: imgData.data.url,
             picture: imgData.data.url,
             condition: data.condition,
             description: data.description,
           };
           console.log(product);
           // Update in database
-          fetch(`${process.env.REACT_APP_API_URL}/categoriesProducts`, {
+          fetch(`${process.env.REACT_APP_API_URL}/products`, {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -68,7 +68,7 @@ const AddProduct = () => {
             .then((res) => res.json())
             .then((data) => {
               toast.success(`${data.name} New product added`);
-              navigate("/dashboard/my-products");
+              navigate("/dashboard/seller/my-products");
             });
         }
       });

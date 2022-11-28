@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createContext } from "react";
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -56,6 +57,11 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const deleteUserAccount = (email) => {
+    setLoading(true);
+    return deleteUser(email);
+  };
+
   //Forget Password
   const resetUserAccountPassword = (email) => {
     setLoading(true);
@@ -64,14 +70,15 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     //this part will execute once the component is mounted.
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
 
     return () => {
       //this part will execute once the component is unmounted.
-      unsubscribe();
+      // setLoading(false);
+      return unSubscribe();
     };
   }, []);
 
@@ -82,6 +89,7 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     logoutUserAccount,
     loginUserAccount,
+    deleteUserAccount,
     resetUserAccountPassword,
     loading,
     setLoading,

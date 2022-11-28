@@ -55,9 +55,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `${process.env.REACT_APP_API_URL}/categoriesProducts/${params.id}`
-          ),
+          fetch(`${process.env.REACT_APP_API_URL}/products/${params.id}`),
       },
       {
         path: "/login",
@@ -79,15 +77,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/dashboard/",
-        element: (
-          <PrivateRoute>
-            <WelcomeDashboard />
-          </PrivateRoute>
-        ),
+        path: "/dashboard",
+        element: <WelcomeDashboard />,
       },
       {
-        path: "/dashboard/all-sellers",
+        path: "/dashboard/admin/all-sellers",
         element: (
           <AdminRoute>
             <AllSellers />
@@ -95,7 +89,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/all-buyers",
+        path: "/dashboard/admin/all-buyers",
         element: (
           <AdminRoute>
             <AllBuyers />
@@ -103,7 +97,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/reported-items",
+        path: "/dashboard/admin/reported-items",
         element: (
           <AdminRoute>
             <ReportedItems />
@@ -111,7 +105,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/add-product",
+        path: "/dashboard/seller/add-product",
         element: (
           <SellerRoute>
             <AddProduct />
@@ -119,7 +113,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/my-products",
+        path: "/dashboard/seller/my-products",
         element: (
           <SellerRoute>
             <MyProducts />
@@ -127,7 +121,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/my-buyers",
+        path: "/dashboard/seller/my-buyers",
         element: (
           <SellerRoute>
             <MyBuyers />
@@ -135,7 +129,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/my-orders",
+        path: "/dashboard/buyer/my-orders",
         element: (
           <BuyerRoute>
             <MyOrders />

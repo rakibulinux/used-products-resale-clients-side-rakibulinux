@@ -3,13 +3,15 @@ import toast from "react-hot-toast";
 import PrimaryButton from "../../../../components/Button/PrimaryButton";
 import Spinner from "../../../../components/Spinner/Spinner";
 import { APIContext } from "../../../../contexts/APIProvider";
+import { AuthContext } from "../../../../contexts/AuthProvider";
 
 const AllBuyers = () => {
+  const { deleteUserAccount } = useContext(AuthContext);
   const { buyers, isLoadingBuyer, refetchBuyer } = useContext(APIContext);
   if (isLoadingBuyer) {
     return <Spinner />;
   }
-  const handleDeleteBuyer = (id, name) => {
+  const handleDeleteBuyer = (id, name, email) => {
     fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
       method: "DELETE",
       headers: {
@@ -18,9 +20,17 @@ const AllBuyers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        // if (data.deletedCount > 0) {
+        //   deleteUserAccount()
+        //     .then(() => {
         console.log(data);
         toast.success(`${name} deleted successfully`);
         refetchBuyer();
+        // })
+        //     .catch((err) => {
+        //       toast.error(err.message);
+        //     });
+        // // }
       });
   };
   return (
@@ -35,6 +45,7 @@ const AllBuyers = () => {
                 <th>Picture</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Verify</th>
                 <th>Delete Buyer</th>
               </tr>
             </thead>
@@ -51,6 +62,8 @@ const AllBuyers = () => {
                   </td>
                   <td>{buyer?.name}</td>
                   <td>{buyer?.email}</td>
+                  <td>{buyer?.seller?.verify}</td>
+
                   <td>
                     <PrimaryButton
                       handler={() => handleDeleteBuyer(buyer?._id, buyer?.name)}

@@ -6,13 +6,12 @@ import { AuthContext } from "../contexts/AuthProvider";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
-  const token = localStorage.getItem("usedPhoneToken");
 
   if (loading) {
     return <Spinner />;
   }
 
-  if (!user && !user?.uid && !token) {
+  if (!user && !user?.uid) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return children;

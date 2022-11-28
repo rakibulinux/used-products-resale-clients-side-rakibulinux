@@ -135,7 +135,7 @@ const BookingModal = ({ setCategory, category }) => {
               </label>
               <input
                 type="text"
-                defaultValue={`$${originalPrice}`}
+                defaultValue={`${originalPrice}`}
                 name="originalPrice"
                 placeholder="Your originalPrice"
                 className="input input-bordered w-full"
@@ -149,7 +149,7 @@ const BookingModal = ({ setCategory, category }) => {
               </label>
               <input
                 type="text"
-                defaultValue={`$${resalePrice}`}
+                defaultValue={`${resalePrice}`}
                 name="resalePrice"
                 placeholder="Your resalePrice"
                 className="input input-bordered w-full"

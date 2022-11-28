@@ -5,7 +5,7 @@ import Spinner from "../../../../components/Spinner/Spinner";
 import { toast } from "react-hot-toast";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
-  const url = `${process.env.REACT_APP_API_URL}/categoriesProducts?email=${user?.email}`;
+  const url = `${process.env.REACT_APP_API_URL}/products?email=${user?.email}`;
   const {
     data: products,
     isLoading,
@@ -24,7 +24,7 @@ const MyProducts = () => {
   });
 
   const handleAdvertise = (id) => {
-    fetch(`${process.env.REACT_APP_API_URL}/categoriesProducts/${id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/products/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
@@ -35,12 +35,9 @@ const MyProducts = () => {
       .then((data) => {
         console.log(data);
         if (data.modifiedCount > 0) {
-          toast.success("Advertisement Added");
+          toast.success("Placed for Advertisement");
           refetch();
-        } else {
-          toast.success("Already placed for Advertisement");
         }
-        console.log(data);
       });
   };
   const handleStatusChange = (id) => {
@@ -53,17 +50,32 @@ const MyProducts = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount > 0) {
-          toast.success("Status Change");
+          toast.success("Available for Advertisement");
           refetch();
-        } else {
-          toast.success("Already placed for Advertisement");
+        }
+      });
+  };
+  const handleDeleteProduct = (id) => {
+    fetch(`${process.env.REACT_APP_API_URL}/products/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
+      },
+      body: JSON.stringify(id),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          toast.success("Delete success Change");
+          refetch();
         }
         console.log(data);
       });
   };
 
+  console.log(products);
   if (isLoading) {
     return <Spinner />;
   }
@@ -76,9 +88,9 @@ const MyProducts = () => {
             <thead>
               <tr>
                 <th>No</th>
-                <th>Name</th>
+                <th>Phone Name</th>
                 <th>Price</th>
-                <th>Change Status</th>
+                <th>Available to sell?</th>
                 <th>Sales Status</th>
                 <th>Advertise</th>
                 <th>Delete</th>
@@ -87,23 +99,29 @@ const MyProducts = () => {
             <tbody>
               {products.map((product, idx) => (
                 <tr key={product._id} className="hover">
-                  <th>{idx + 1}</th>
+                  <td>
+                    <span className="font-bold">{idx + 1}</span>
+                  </td>
                   <td>{product.phoneName}</td>
                   <td>{product.resalePrice}</td>
 
                   <td>
-                    {!product?.advertise && (
+                    {!product?.status ? (
                       <button
                         onClick={() => handleStatusChange(product._id)}
                         className="btn btn-xs border-none bg-pink-700"
                       >
-                        Change Status
+                        Make Available
                       </button>
+                    ) : (
+                      <span>Status Changed</span>
                     )}
                   </td>
-                  <td>{product?.status}</td>
                   <td>
-                    {product?.status && (
+                    {product?.advertise && product?.status && "Placed for ad"}
+                  </td>
+                  <td>
+                    {!product?.advertise && product?.status && (
                       <button
                         onClick={() => handleAdvertise(product._id)}
                         className="btn btn-xs border-none bg-pink-700"
@@ -113,7 +131,10 @@ const MyProducts = () => {
                     )}
                   </td>
                   <td>
-                    <button className="btn btn-xs border-none bg-primary">
+                    <button
+                      onClick={() => handleDeleteProduct(product._id)}
+                      className="btn btn-xs border-none bg-red-600"
+                    >
                       Delete
                     </button>
                   </td>

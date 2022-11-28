@@ -5,16 +5,25 @@ import Spinner from "../components/Spinner/Spinner";
 import { AuthContext } from "../contexts/AuthProvider";
 
 const BuyerRoute = ({ children }) => {
-  const { user, loading, signOutUser } = useContext(AuthContext);
-  const [isBuyer, isBuyerLoading] = useBuyer(user?.email);
+  const {
+    user,
+    loading,
+    signOutUser: logoutUserAccount,
+  } = useContext(AuthContext);
   const location = useLocation();
+
+  const [isBuyer, isBuyerLoading] = useBuyer(user?.email);
+  // const location = useLocation();
   if (loading || isBuyerLoading) {
     return <Spinner />;
   }
   if (!user && !isBuyer) {
     return (
-      signOutUser(),
-      (<Navigate to="/login" state={{ from: location }} replace />)
+      logoutUserAccount(),
+      (
+        // location(null),
+        <Navigate to="/" state={{ from: location }} replace />
+      )
     );
   }
   return children;

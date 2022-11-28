@@ -1,12 +1,21 @@
 import React from "react";
 import { useContext } from "react";
+import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
-
+  const handleLogOut = () => {
+    logoutUserAccount()
+      .then(() => {
+        toast.success("LogOut Success");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
   const navItems = (
     <>
       <li>
@@ -28,14 +37,6 @@ const Navbar = () => {
 
       {!user?.uid ? (
         <>
-          <li>
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-sky-600" : "")}
-              to="/categories"
-            >
-              Categories
-            </NavLink>
-          </li>
           <li>
             <NavLink
               className={({ isActive }) => (isActive ? "text-sky-600" : "")}
@@ -70,7 +71,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <button onClick={logoutUserAccount}>SignOut</button>
+            <button onClick={handleLogOut}>SignOut</button>
           </li>
         </>
       )}

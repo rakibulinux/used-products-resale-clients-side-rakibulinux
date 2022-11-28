@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+import Spinner from "../components/Spinner/Spinner";
 import { AuthContext } from "../contexts/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
 import useBuyer from "../hooks/useBuyer";
@@ -7,10 +8,13 @@ import useSeller from "../hooks/useSeller";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
 
 const DashboardLayout = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   const [isSeller] = useSeller(user?.email);
   const [isBuyer] = useBuyer(user?.email);
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <div>
       <Navbar />
@@ -27,39 +31,41 @@ const DashboardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-            {/* <li>
-              <Link to="/dashboard">My Booking</Link>
-            </li> */}
+            <li>
+              <Link to="/dashboard">My Dashboard</Link>
+            </li>
             {isBuyer && (
               <>
                 <li>
-                  <Link to="/dashboard/my-orders">My Orders</Link>
+                  <Link to="/dashboard/buyer/my-orders">My Orders</Link>
                 </li>
               </>
             )}
             {isSeller && (
               <>
                 <li>
-                  <Link to="/dashboard/add-product">Add a Product</Link>
+                  <Link to="/dashboard/seller/add-product">Add a Product</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/my-products">My Products</Link>
+                  <Link to="/dashboard/seller/my-products">My Products</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/my-buyers">My Buyers</Link>
+                  <Link to="/dashboard/seller/my-buyers">My Buyers</Link>
                 </li>
               </>
             )}
             {isAdmin && (
               <>
                 <li>
-                  <Link to="/dashboard/all-sellers">All Sellers</Link>
+                  <Link to="/dashboard/admin/all-sellers">All Sellers</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/all-buyers">All Buyers</Link>
+                  <Link to="/dashboard/admin/all-buyers">All Buyers</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/reported-items">Reported Items</Link>
+                  <Link to="/dashboard/admin/reported-items">
+                    Reported Items
+                  </Link>
                 </li>
               </>
             )}

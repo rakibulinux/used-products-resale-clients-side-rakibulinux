@@ -3,6 +3,7 @@ export const setAuthToken = (user, role) => {
     name: user.displayName,
     picture: user.photoURL,
     email: user.email,
+    verify: false,
     role: role,
   };
   console.log(currentUser);
@@ -16,7 +17,7 @@ export const setAuthToken = (user, role) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      console.log(data.token);
       localStorage.setItem("usedPhoneToken", data.token);
     });
 };

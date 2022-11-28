@@ -5,6 +5,7 @@ import PrimaryButton from "../../components/Button/PrimaryButton";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
 import Spinner from "../../components/Spinner/Spinner";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
   const {
@@ -13,11 +14,16 @@ const Login = () => {
     resetUserAccountPassword,
     loading,
   } = useContext(AuthContext);
-
-  const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
-  const localtion = useLocation();
-  const from = localtion.state?.from?.pathname || "/";
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
+  // const token = localStorage.getItem("usedPhoneToken");
+  if (token) {
+    navigate(from, { replace: true });
+  }
+  const [userEmail, setUserEmail] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,13 +32,16 @@ const Login = () => {
     const password = form.password.value;
 
     //Sign In user
-    loginUserAccount(email, password)
+    loginUserAccount(email, password, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
+      },
+    })
       .then((result) => {
         const user = result.user;
         toast.success("Login with email success");
-        console.log(user);
+        setLoginUserEmail(user?.email);
         setAuthToken(user);
-        navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.message);
@@ -44,12 +53,8 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Login with google success");
+        setLoginUserEmail(user?.email);
         setAuthToken(user);
-        console.log(user);
-        if (loading) {
-          return <Spinner />;
-        }
-        navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.message);

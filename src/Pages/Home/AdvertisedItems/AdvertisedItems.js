@@ -6,7 +6,7 @@ import AdvertisedItemDetails from "./AdvertisedItemDetails";
 
 const AdvertisedItems = () => {
   const [category, setCategory] = useState(null);
-  const url = "http://localhost:5000/advertise?advertise=advertise";
+  const url = `${process.env.REACT_APP_API_URL}/advertise?advertise=advertise`;
   const {
     data: products,
     isLoading,
@@ -34,7 +34,7 @@ const AdvertisedItems = () => {
           Advertised Items{" "}
         </div>
       )}
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 w-11/12 mx-auto justify-center items-center">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-11/12 mx-auto justify-center items-center">
         {products.length > 0 &&
           products.map((product) => (
             <AdvertisedItemDetails

@@ -36,6 +36,7 @@ const AllSellers = () => {
                 <th>Picture</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Verify</th>
                 <th>Delete Seller</th>
               </tr>
             </thead>
@@ -52,6 +53,7 @@ const AllSellers = () => {
                   </td>
                   <td>{seller?.name}</td>
                   <td>{seller?.email}</td>
+                  <td>{seller?.verify ? "Verified" : "Not Verified"}</td>
                   <td>
                     <PrimaryButton
                       handler={() =>
