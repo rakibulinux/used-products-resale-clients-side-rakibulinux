@@ -14,7 +14,8 @@
       "verify": true
     },
     "picture": "https://i.ibb.co/9pTsWwF/apple-iphone-12-pro-max-1.jpg",
-    "location": "Kushtia, Khulna, Bangladesh"
+    "location": "Kushtia, Khulna, Bangladesh",
+    "description": "Apple iPhone 12 Pro Max smartphone. Announced Oct 2020. Features 6.7″ display, Apple A14 Bionic chipset, 3687 mAh battery, 512 GB storage, 6 GB RAM"
   },
   {
     "categoryId": "637f9a327d79ab851e18f03d",
@@ -31,7 +32,8 @@
       "verify": true
     },
     "picture": "https://i.ibb.co/wyyymMG/Apple-i-Phone-11-Pro-Max.jpg",
-    "location": "Kushtia, Khulna, Bangladesh"
+    "location": "Kushtia, Khulna, Bangladesh",
+    "description": "Apple iPhone 12 Pro Max smartphone. Announced Oct 2020. Features 6.7″ display, Apple A14 Bionic chipset, 3687 mAh battery, 512 GB storage, 6 GB RAM"
   },
   {
     "categoryId": "637f9a327d79ab851e18f03e",
@@ -48,7 +50,8 @@
       "verify": false
     },
     "picture": "https://i.ibb.co/hY5mC1m/samsung-galaxy-s20.jpg",
-    "location": "Kushtia, Khulna, Bangladesh"
+    "location": "Kushtia, Khulna, Bangladesh",
+    "description": "Apple iPhone 12 Pro Max smartphone. Announced Oct 2020. Features 6.7″ display, Apple A14 Bionic chipset, 3687 mAh battery, 512 GB storage, 6 GB RAM"
   },
   {
     "categoryId": "637f9a327d79ab851e18f03e",
@@ -65,7 +68,8 @@
       "verify": false
     },
     "picture": "https://i.ibb.co/C2mfX7v/samsung-galaxy-s21-ultra-5g.jpg",
-    "location": "Kushtia, Khulna, Bangladesh"
+    "location": "Kushtia, Khulna, Bangladesh",
+    "description": "Apple iPhone 12 Pro Max smartphone. Announced Oct 2020. Features 6.7″ display, Apple A14 Bionic chipset, 3687 mAh battery, 512 GB storage, 6 GB RAM"
   },
   {
     "categoryId": "637f9a327d79ab851e18f03f",
@@ -82,7 +86,8 @@
       "verify": false
     },
     "picture": "https://i.ibb.co/z6hBkrx/Nokia-C21-Android-Smartphone.jpg",
-    "location": "Kushtia, Khulna, Bangladesh"
+    "location": "Kushtia, Khulna, Bangladesh",
+    "description": "Apple iPhone 12 Pro Max smartphone. Announced Oct 2020. Features 6.7″ display, Apple A14 Bionic chipset, 3687 mAh battery, 512 GB storage, 6 GB RAM"
   },
   {
     "categoryId": "637f9a327d79ab851e18f03f",
@@ -99,7 +104,8 @@
       "verify": false
     },
     "picture": "https://i.ibb.co/xgMw9Xc/nokia-g50.jpg",
-    "location": "Kushtia, Khulna, Bangladesh"
+    "location": "Kushtia, Khulna, Bangladesh",
+    "description": "Apple iPhone 12 Pro Max smartphone. Announced Oct 2020. Features 6.7″ display, Apple A14 Bionic chipset, 3687 mAh battery, 512 GB storage, 6 GB RAM"
   },
   {
     "categoryId": "637f9a327d79ab851e18f03e",
@@ -139,7 +145,7 @@
     "location": "Kushtia",
     "picture": "https://i.ibb.co/28k53TP/Apple-i-Phone-13-Pro-Max-Sierra-Blue-Price.jpg",
     "condition": "excelent",
-    "description": "Nano-SIM and eSIM or Dual SIM (Nano-SIM, dual stand-by)\n \tIP68 dust/water resistant (up to 6m for 30 mins)\nApple Pay (Visa, MasterCard, AMEX certified)"
+    "description": "Nano-SIM and eSIM or Dual SIM (Nano-SIM, dual stand-by)   IP68 dust/water resistant (up to 6m for 30 mins) Apple Pay (Visa, MasterCard, AMEX certified)"
   },
   {
     "categoryId": "637f9a327d79ab851e18f03d",
@@ -159,7 +165,7 @@
     "location": "New York",
     "picture": "https://i.ibb.co/MCJv8wC/apple-iphone-14-pro-max.jpg",
     "condition": "excelent",
-    "description": "Nano-SIM and eSIM - International\nDual eSIM with multiple numbers - USA\nDual SIM (Nano-SIM, dual stand-by) - China\n \tIP68 dust/water resistant (up to 6m for 30 mins)\nApple Pay (Visa, MasterCard, AMEX certified)"
+    "description": "Nano-SIM and eSIM - International Dual eSIM with multiple numbers - USA Dual SIM (Nano-SIM, dual stand-by) - China IP68 dust/water resistant (up to 6m for 30 mins)Apple Pay (Visa, MasterCard, AMEX certified)"
   },
   {
     "categoryId": "637f9a327d79ab851e18f03d",
@@ -179,6 +185,6 @@
     "location": "New York",
     "picture": "https://i.ibb.co/yq3T06b/apple-iphone-14-pro.jpg",
     "condition": "excelent",
-    "description": "It's a good abd bad phone"
+    "description": "It's a good abd bad phone, we can buy it"
   }
 ]

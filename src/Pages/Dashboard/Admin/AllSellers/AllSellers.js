@@ -22,6 +22,21 @@ const AllSellers = () => {
         refetchSeller();
       });
   };
+
+  const handleVerifySeller = (id, name) => {
+    fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success(`${name} deleted successfully`);
+        refetchSeller();
+      });
+  };
+
   return (
     <div>
       <h1 className="text-3xl">All Sellers</h1>
@@ -51,7 +66,21 @@ const AllSellers = () => {
                   </td>
                   <td>{seller?.name}</td>
                   <td>{seller?.email}</td>
-                  <td>{seller?.verify ? "Verified" : "Not Verified"}</td>
+                  <td>
+                    {seller?.verify ? (
+                      "Verified"
+                    ) : (
+                      <PrimaryButton
+                        handler={() =>
+                          handleVerifySeller(seller?._id, seller?.name)
+                        }
+                        type="submit"
+                        classes="btn w-full px-2 py-2 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100 border-none"
+                      >
+                        Verify User
+                      </PrimaryButton>
+                    )}
+                  </td>
                   <td>
                     <PrimaryButton
                       handler={() =>

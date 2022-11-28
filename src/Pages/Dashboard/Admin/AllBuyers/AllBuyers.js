@@ -22,6 +22,21 @@ const AllBuyers = () => {
         refetchBuyer();
       });
   };
+
+  const handleVerifySeller = (id, name) => {
+    fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success(`${name} deleted successfully`);
+        refetchBuyer();
+      });
+  };
+
   return (
     <div>
       <h1 className="text-3xl">All Buyers</h1>
@@ -51,8 +66,21 @@ const AllBuyers = () => {
                   </td>
                   <td>{buyer?.name}</td>
                   <td>{buyer?.email}</td>
-                  <td>{buyer?.seller?.verify}</td>
-
+                  <td>
+                    {buyer?.verify ? (
+                      "Verified"
+                    ) : (
+                      <PrimaryButton
+                        handler={() =>
+                          handleVerifySeller(buyer?._id, buyer?.name)
+                        }
+                        type="submit"
+                        classes="btn w-full px-2 py-2 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100 border-none"
+                      >
+                        Verify Buyer
+                      </PrimaryButton>
+                    )}
+                  </td>
                   <td>
                     <PrimaryButton
                       handler={() => handleDeleteBuyer(buyer?._id, buyer?.name)}
