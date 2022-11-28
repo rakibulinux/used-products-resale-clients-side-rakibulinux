@@ -8,7 +8,6 @@ const SecondHandProductCategories = () => {
   if (isLoading) {
     return <Spinner />;
   }
-  console.log(categories);
   return (
     <div>
       <div className="divider md:w-8/12 md:mx-auto my-10 sm:text-2xl md:text-5xl ">

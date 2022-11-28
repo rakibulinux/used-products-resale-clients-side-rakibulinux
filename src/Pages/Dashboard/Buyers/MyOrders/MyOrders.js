@@ -16,7 +16,6 @@ const MyOrders = () => {
       return data;
     },
   });
-  console.log(orders);
   if (isLoading) {
     return <Spinner />;
   }

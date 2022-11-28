@@ -6,7 +6,6 @@ import { APIContext } from "../../../../contexts/APIProvider";
 
 const AllSellers = () => {
   const { sellers, isLoadingSeller, refetchSeller } = useContext(APIContext);
-  console.log(sellers);
   if (isLoadingSeller) {
     return <Spinner />;
   }
@@ -19,7 +18,6 @@ const AllSellers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         toast.success(`${name} deleted successfully`);
         refetchSeller();
       });

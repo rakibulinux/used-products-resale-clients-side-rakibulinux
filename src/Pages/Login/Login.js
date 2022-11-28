@@ -13,6 +13,7 @@ const Login = () => {
     loginUserAccount,
     resetUserAccountPassword,
     loading,
+    setLoading,
   } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,6 +46,9 @@ const Login = () => {
       })
       .catch((err) => {
         toast.error(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -58,6 +62,9 @@ const Login = () => {
       })
       .catch((err) => {
         toast.error(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 

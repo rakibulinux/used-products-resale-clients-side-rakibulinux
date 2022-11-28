@@ -33,7 +33,6 @@ const MyProducts = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount > 0) {
           toast.success("Placed for Advertisement");
           refetch();
@@ -66,16 +65,13 @@ const MyProducts = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.deletedCount > 0) {
           toast.success("Delete success Change");
           refetch();
         }
-        console.log(data);
       });
   };
 
-  console.log(products);
   if (isLoading) {
     return <Spinner />;
   }

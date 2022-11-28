@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import PrimaryButton from "../../../../components/Button/PrimaryButton";
+import { APIContext } from "../../../../contexts/APIProvider";
 const ProductDetails = ({ usedPhone, setCategory }) => {
   const {
+    _id,
     phoneName,
     originalPrice,
     resalePrice,
@@ -10,9 +13,11 @@ const ProductDetails = ({ usedPhone, setCategory }) => {
     location,
     seller: { name, img, verify },
     yearsOfUse,
+    description,
   } = usedPhone;
+  const { reportToAdmin } = useContext(APIContext);
   return (
-    <div className="card card-compact w-96 bg-base-100 my-4 shadow-2xl">
+    <div className="card card-compact w-96 bg-base-100 p-2 my-4 shadow-2xl">
       <figure>
         <img className="h-96" src={picture} alt={phoneName} />
       </figure>
@@ -44,7 +49,14 @@ const ProductDetails = ({ usedPhone, setCategory }) => {
         <p>
           <span className="font-bold">Posted Time:</span> {publishedDate}
         </p>
-        <div className="card-actions w-full">
+        {description && (
+          <p>
+            <span className="font-bold">Description:</span>{" "}
+            {description.slice(0, 100)}
+          </p>
+        )}
+
+        <div className="card-actions flex justify-between w-full">
           <label
             onClick={() => setCategory(usedPhone)}
             htmlFor="booking-modal"
@@ -52,6 +64,12 @@ const ProductDetails = ({ usedPhone, setCategory }) => {
           >
             Book now
           </label>
+          <PrimaryButton
+            handler={() => reportToAdmin(_id)}
+            classes={`hover:text-gray-100 bg-gradient-to-r from-cyan-500 to-sky-600 w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 text-gray-100 cursor-pointer text-center`}
+          >
+            Report to Admin
+          </PrimaryButton>
         </div>
       </div>
     </div>

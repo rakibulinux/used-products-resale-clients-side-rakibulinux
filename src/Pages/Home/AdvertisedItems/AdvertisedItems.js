@@ -6,7 +6,7 @@ import AdvertisedItemDetails from "./AdvertisedItemDetails";
 
 const AdvertisedItems = () => {
   const [category, setCategory] = useState(null);
-  const url = `${process.env.REACT_APP_API_URL}/advertise?advertise=advertise`;
+  const url = `${process.env.REACT_APP_API_URL}/advertise?advertise`;
   const {
     data: products,
     isLoading,
@@ -26,7 +26,6 @@ const AdvertisedItems = () => {
   if (isLoading) {
     return <Spinner />;
   }
-  console.log(products);
   return (
     <div>
       {products.length > 0 && (

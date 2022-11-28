@@ -8,27 +8,8 @@ const stripePromise = loadStripe(process.env.REACT_APP_PB_KEY);
 
 const Payments = () => {
   const booking = useLoaderData();
-  const {
-    _id,
-    email,
-    meetingLocation,
-    name,
-    originalPrice,
-    phone,
-    phoneName,
-    picture,
-    resalePrice,
-  } = booking;
-  console.log(
-    email,
-    meetingLocation,
-    name,
-    originalPrice,
-    phone,
-    phoneName,
-    picture,
-    resalePrice
-  );
+  const { phoneName, resalePrice } = booking;
+
   return (
     <div>
       <h1 className="text-3xl">Payment for {phoneName}</h1>

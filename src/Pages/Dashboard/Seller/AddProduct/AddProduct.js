@@ -19,7 +19,6 @@ const AddProduct = () => {
   } = useForm();
 
   const navigate = useNavigate();
-  // console.log(userInfo);
   const date = format(new Date(), "PP");
   const handleAddProduct = (data) => {
     const image = data.image[0];
@@ -33,7 +32,6 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          console.log(imgData);
           toast.success("Image upload success");
           const product = {
             categoryId: data.categoryId,
@@ -55,7 +53,6 @@ const AddProduct = () => {
             condition: data.condition,
             description: data.description,
           };
-          console.log(product);
           // Update in database
           fetch(`${process.env.REACT_APP_API_URL}/products`, {
             method: "POST",
@@ -74,7 +71,6 @@ const AddProduct = () => {
       });
   };
 
-  // console.log(categories, isLoading);
   if (isLoading) {
     return <Spinner />;
   }

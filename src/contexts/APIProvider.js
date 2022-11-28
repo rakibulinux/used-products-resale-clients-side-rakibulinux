@@ -1,8 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { createContext } from "react";
+import toast from "react-hot-toast";
 
 export const APIContext = createContext();
 const APIProvider = ({ children }) => {
+  const reportToAdmin = (id) => {
+    fetch(`${process.env.REACT_APP_API_URL}/reportProduct/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
+      },
+      body: JSON.stringify(id),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("You have reported successfully");
+        }
+        if (data.modifiedCount === 0) {
+          toast.error("Already reported");
+        }
+      });
+  };
   const {
     data: categories,
     isLoading,
@@ -50,6 +69,7 @@ const APIProvider = ({ children }) => {
     sellers,
     isLoadingSeller,
     refetchSeller,
+    reportToAdmin,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

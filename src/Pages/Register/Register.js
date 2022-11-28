@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
-import useToken from "../../hooks/useToken";
 
 const Register = () => {
   const [role, setRole] = useState("buyer");
@@ -13,12 +12,7 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  // const [loginUserEmail, setLoginUserEmail] = useState("");
-  // const [token] = useToken(loginUserEmail);
-  // // const token = localStorage.getItem("usedPhoneToken");
-  // if (token) {
-  //   navigate(from, { replace: true });
-  // }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -29,7 +23,6 @@ const Register = () => {
 
     const formData = new FormData();
     formData.append("image", image);
-    console.log(formData);
     fetch(
       `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMG_BB_KEY}`,
       {
@@ -44,7 +37,6 @@ const Register = () => {
           createUserAccount(email, password)
             .then((result) => {
               const user = result.user;
-              // setLoginUserEmail(user?.email);
               updateUserProfile(name, data.data.url)
                 .then(() => {
                   toast.success("Photo and Name updated");
@@ -54,7 +46,6 @@ const Register = () => {
                 .catch((err) => {
                   toast.error(err.message);
                 });
-              console.log(user);
             })
             .catch((err) => {
               toast.error(err.message);
@@ -70,17 +61,17 @@ const Register = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        // setLoginUserEmail(user?.email);
         toast.success("Login success with google");
-        console.log(user);
         setAuthToken(user, role);
         navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
-  // console.log(role);
 
   return (
     <div className="flex justify-center items-center pt-8">

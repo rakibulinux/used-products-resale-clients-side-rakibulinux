@@ -6,9 +6,7 @@ import { AuthContext } from "../../../../contexts/AuthProvider";
 
 const BookingModal = ({ setCategory, category }) => {
   const { user } = useContext(AuthContext);
-  const { phoneName, originalPrice, resalePrice, picture } = category;
-
-  console.log(category);
+  const { _id, phoneName, originalPrice, resalePrice, picture } = category;
 
   const handleBooking = (e) => {
     e.preventDefault();
@@ -25,12 +23,12 @@ const BookingModal = ({ setCategory, category }) => {
       phoneName: phoneName,
       picture: picture,
       meetingLocation,
+      productId: _id,
       email,
       phone,
       originalPrice: originalPrice,
       resalePrice: resalePrice,
     };
-    console.log(booking);
     setCategory(null);
     fetch(`${process.env.REACT_APP_API_URL}/bookings`, {
       method: "POST",
@@ -41,7 +39,6 @@ const BookingModal = ({ setCategory, category }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.acknowledged) {
           setCategory(null);
           toast.success("Booking success");

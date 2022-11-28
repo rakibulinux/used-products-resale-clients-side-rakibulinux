@@ -24,7 +24,6 @@ const CheckoutForm = ({ booking }) => {
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
   }, [resalePrice]);
-  console.log(resalePrice);
   const handleSubmit = async (event) => {
     event.preventDefault();
     setProcessing(true);
@@ -44,7 +43,6 @@ const CheckoutForm = ({ booking }) => {
     });
 
     if (error) {
-      console.log(error);
       setCardError(error.message);
       toast.error(error.message);
     } else {
@@ -74,7 +72,6 @@ const CheckoutForm = ({ booking }) => {
         transactionId: paymentMethod.id,
         bookingId: _id,
       };
-      console.log(payment);
       fetch(`${process.env.REACT_APP_API_URL}/payments`, {
         method: "POST",
         headers: {
