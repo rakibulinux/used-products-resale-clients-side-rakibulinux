@@ -21,6 +21,8 @@ const AddProduct = () => {
   const navigate = useNavigate();
   const date = format(new Date(), "PP");
   const handleAddProduct = (data) => {
+    console.log(data);
+    const phoneName = data.name;
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -64,7 +66,7 @@ const AddProduct = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              toast.success(`${data.name} New product added`);
+              toast.success(`${phoneName} New product added`);
               navigate("/dashboard/seller/my-products");
             });
         }

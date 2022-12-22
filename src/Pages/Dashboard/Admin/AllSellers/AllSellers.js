@@ -24,7 +24,7 @@ const AllSellers = () => {
   };
 
   const handleVerifySeller = (id, name) => {
-    fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
@@ -32,7 +32,7 @@ const AllSellers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast.success(`${name} deleted successfully`);
+        toast.success(`${name} verify successfully`);
         refetchSeller();
       });
   };

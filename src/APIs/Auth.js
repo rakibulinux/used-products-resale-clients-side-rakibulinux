@@ -6,6 +6,7 @@ export const setAuthToken = (user, role) => {
     verify: false,
     role: role,
   };
+  console.log(user);
   // Save user is DB
   fetch(`${process.env.REACT_APP_API_URL}/users/${user?.email}`, {
     method: "PUT",
@@ -16,6 +17,7 @@ export const setAuthToken = (user, role) => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       localStorage.setItem("usedPhoneToken", data.token);
     });
 };
