@@ -21,7 +21,6 @@ const AddProduct = () => {
   const navigate = useNavigate();
   const date = format(new Date(), "PP");
   const handleAddProduct = (data) => {
-    console.log(data);
     const phoneName = data.name;
     const image = data.image[0];
     const formData = new FormData();
